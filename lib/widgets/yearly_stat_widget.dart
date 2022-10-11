@@ -26,13 +26,13 @@ class _YearlyStatViewState extends State<YearlyStatView> {
         child: FutureBuilder<List<YearlyDeaths>>(
           future: _getYearlyStat(widget.accidentData),
           builder: (BuildContext context,
-              AsyncSnapshot<List<YearlyDeaths>> snapshot2) {
-            if (snapshot2.data != null) {
+              AsyncSnapshot<List<YearlyDeaths>> snapshot) {
+            if (snapshot.data != null) {
               return SfCartesianChart(
                 series: <ChartSeries>[
                   // Renders line chart
                   LineSeries<YearlyDeaths, int>(
-                    dataSource: snapshot2.data!,
+                    dataSource: snapshot.data!,
                     xValueMapper: (YearlyDeaths data, _) => data.year,
                     yValueMapper: (YearlyDeaths data, _) => data.amountDeaths,
                   )
@@ -58,9 +58,9 @@ class _YearlyStatViewState extends State<YearlyStatView> {
           List.from(data.where((element) => element.date.year == year.year));
       // _listYearlyDeaths.add(yearlyAccident);
       int num = 0;
-      yearlyAccident.forEach((element) {
+      for (var element in yearlyAccident) {
         num += element.numberDead;
-      });
+      }
       listYearlyDeaths.add(YearlyDeaths(i, num));
     }
     listYearlyDeaths.removeAt(0);

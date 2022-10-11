@@ -6,6 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_radar_chart/flutter_radar_chart.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:json_theme/json_theme.dart';
+import 'package:swiss_avalanche_dashboard/model/elevation_deaths_stat.dart';
+import 'package:swiss_avalanche_dashboard/widgets/elevation_stat_widget.dart';
 import 'package:swiss_avalanche_dashboard/widgets/map_widget.dart';
 import 'package:swiss_avalanche_dashboard/widgets/yearly_stat_widget.dart';
 // import 'package:multi_charts/multi_charts.dart';
@@ -156,23 +158,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     StaggeredGridTile.count(
                       crossAxisCellCount: 1,
                       mainAxisCellCount: 1,
-                      child: Card(
-                        elevation: 20,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SfCartesianChart(
-                              isTransposed: true,
-                              series: <ChartSeries>[
-                                HistogramSeries<AccidentData, double>(
-                                    dataSource: snapshot.data!,
-                                    showNormalDistributionCurve: true,
-                                    // curveColor: const Color.fromRGBO(192, 108, 132, 1),
-                                    binInterval: 200,
-                                    yValueMapper: (AccidentData data, _) =>
-                                        data.elevation)
-                              ]),
-                        ),
-                      ),
+                      child: ElevationView(accidentData: snapshot.data!),
                     ),
                     StaggeredGridTile.count(
                       crossAxisCellCount: 1,
