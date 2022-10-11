@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:json_theme/json_theme.dart';
-import 'package:swiss_avalanche_dashboard/presentation/custom_icons.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 
@@ -48,24 +47,13 @@ class _MyHomePageState extends State<MyHomePage> {
   late MapShapeSource _mapSource;
   late MapZoomPanBehavior _zoomPanBehavior;
   late MapShapeLayerController _controller;
-  late MapShapeSource _dataSource;
   List<AccidentData> _listAccidentData = [];
-  late List<Model> _data;
 
   @override
   void initState() {
-    _data = <Model>[
-      Model(7.277470902242295, 46.11555404318283),
-      // Model(51.16569, 10.451526),
-      // Model(-25.274398, 133.775136),
-      // Model(20.593684, 78.96288),
-      // Model(61.52401, 105.318756)
-    ];
-
-    _mapSource = MapShapeSource.asset(
+    _mapSource = const MapShapeSource.asset(
       'swissBOUNDARIES3D_1_3_TLM_KANTONSGEBIET.json',
       shapeDataField: 'NAME',
-      // dataCount: _data.length,
     );
 
     _loadAsset().then((value) {
@@ -73,11 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
         _listAccidentData.addAll(value);
         _listAccidentData.forEach((element) {
           _controller.insertMarker(_listAccidentData.indexOf(element));
-          setState(() {});
         });
-        // for (var element in _listAccidentData) {
-        //   print(element.toString());
-        // }
       });
     });
     _zoomPanBehavior = MapZoomPanBehavior();
@@ -200,82 +184,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
           ),
-        )
-        // body: SingleChildScrollView(
-        //   child: Padding(
-        //     padding: const EdgeInsets.all(8.0),
-        //     child: Column(
-        //       children: [
-        //         Expanded(
-        //           child: Row(
-        //             children: [
-        //               Expanded(
-        //                 child: Card(
-        //                   elevation: 20,
-        //                   child: SfMaps(
-        //                     layers: [
-        //                       MapShapeLayer(
-        //                         source: _mapSource,
-        //                         showDataLabels: true,
-        //                         strokeColor: Theme.of(context).primaryColor,
-        //                         strokeWidth: 0.5,
-        //                         dataLabelSettings: MapDataLabelSettings(
-        //                             textStyle: TextStyle(
-        //                                 color: Colors.black,
-        //                                 fontWeight: FontWeight.bold,
-        //                                 fontSize: Theme.of(context).textTheme.caption!.fontSize)),
-        //                       ),
-        //                     ],
-        //                   ),
-        //                 ),
-        //               ),
-        //               Column(
-        //                 children: [
-        //                   Row(
-        //                     children: [
-        //                       const Card(
-        //                         elevation: 20,
-        //                         child: DoughnutChart(),
-        //                       ),
-        //                       const Card(
-        //                         elevation: 20,
-        //                         child: DoughnutChart(),
-        //                       ),
-        //                     ],
-        //                   ),
-        //                   Row(
-        //                     children: [
-        //                       const Card(
-        //                         elevation: 20,
-        //                         child: DoughnutChart(),
-        //                       ),
-        //                       const Card(
-        //                         elevation: 20,
-        //                         child: DoughnutChart(),
-        //                       ),
-        //                     ],
-        //                   ),
-        //                 ],
-        //               )
-        //             ],
-        //           ),
-        //         ),
-        //         Row(
-        //           children: [
-        //             const Card(
-        //               elevation: 20,
-        //               child: DoughnutChart(),
-        //             ),
-        //             const Card(
-        //               elevation: 20,
-        //               child: DoughnutChart(),
-        //             ),
-        //           ],
-        //         ),
-        //       ],
-        //     ),
-        //   ),
-        // ),
+        ),
         );
   }
 
@@ -296,35 +205,9 @@ class _MyHomePageState extends State<MyHomePage> {
           singleDataList[singleDataList.indexOf(element)] = null;
         }
       }
-      // for (int i = 0; i<16; i++) {
-      //   if (i == 0 && singleDataList[i] is! int) print('field: $i of element with id: ${singleDataList[0]}');
-      //   if (i == 1 && singleDataList[i] is! DateTime) print('field: $i of element with id: ${singleDataList[0]}');
-      //   if (i == 2 && singleDataList[i] is! int) print('field: $i of element with id: ${singleDataList[0]}');
-      //   if (i == 3 && singleDataList[i] is! String) print('field: $i of element with id: ${singleDataList[0]}');
-      //   if (i == 4 && singleDataList[i] is! String) print('field: $i of element with id: ${singleDataList[0]}');
-      //   if (i == 5 && singleDataList[i] is! String) print('field: $i of element with id: ${singleDataList[0]}');
-      //   if (i == 6 && singleDataList[i] is! double) print('field: $i of element with id: ${singleDataList[0]}');
-      //   if (i == 7 && singleDataList[i] is! double) print('field: $i of element with id: ${singleDataList[0]}');
-      //   if (i == 8 && singleDataList[i] is! int) print('field: $i of element with id: ${singleDataList[0]}');
-      //   if (i == 9 && singleDataList[i] is! int) print('field: $i of element with id: ${singleDataList[0]}');
-      //   if (i == 10 && singleDataList[i] is! String?) print('field: $i of element with id: ${singleDataList[0]}');
-      //   if (i == 11 && singleDataList[i] is! int?) print('field: $i of element with id: ${singleDataList[0]}');
-      //   if (i == 12 && singleDataList[i] is! int?) print('field: $i of element with id: ${singleDataList[0]}');
-      //   if (i == 13 && singleDataList[i] is! int) print('field: $i of element with id: ${singleDataList[0]}');
-      //   if (i == 14 && singleDataList[i] is! int) print('field: $i of element with id: ${singleDataList[0]}');
-      //   if (i == 15 && singleDataList[i] is! int) print('field: $i of element with id: ${singleDataList[0]}');
-      //   if (i == 16 && singleDataList[i] is! String) print('field: $i of element with id: ${singleDataList[0]}');
-      // }
       list.add(AccidentData.fromList(singleDataList));
     }
 
     return list;
   }
-}
-
-class Model {
-  Model(this.latitude, this.longitude);
-
-  final double latitude;
-  final double longitude;
 }
