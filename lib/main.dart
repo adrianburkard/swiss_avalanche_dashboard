@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:json_theme/json_theme.dart';
+import 'package:swiss_avalanche_dashboard/presentation/custom_icons.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 
@@ -49,21 +50,31 @@ class _MyHomePageState extends State<MyHomePage> {
   late MapShapeLayerController _controller;
   late MapShapeSource _dataSource;
   List<AccidentData> _listAccidentData = [];
+  late List<Model> _data;
 
   @override
   void initState() {
-    _mapSource = const MapShapeSource.asset(
+    _data = <Model>[
+      Model(7.277470902242295, 46.11555404318283),
+      // Model(51.16569, 10.451526),
+      // Model(-25.274398, 133.775136),
+      // Model(20.593684, 78.96288),
+      // Model(61.52401, 105.318756)
+    ];
+
+    _mapSource = MapShapeSource.asset(
       'swissBOUNDARIES3D_1_3_TLM_KANTONSGEBIET.json',
       shapeDataField: 'NAME',
+      // dataCount: _data.length,
     );
 
     _loadAsset().then((value) {
       setState(() {
         _listAccidentData.addAll(value);
         _listAccidentData.forEach((element) {
-
-        })
-        _controller.insertMarker(0);
+          _controller.insertMarker(_listAccidentData.indexOf(element));
+          setState(() {});
+        });
         // for (var element in _listAccidentData) {
         //   print(element.toString());
         // }
@@ -105,21 +116,26 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: SfMaps(
                           layers: [
                             MapShapeLayer(
+                              source: _mapSource,
                               markerBuilder: (BuildContext context, int index) {
                                 return MapMarker(
-                                  latitude: _listAccidentData[index].xCoordinate,
-                                  longitude: _listAccidentData[index].yCoordinate,
-                                  child: Icon(Icons.add_location),
+                                  latitude:
+                                      _listAccidentData[index].yCoordinate,
+                                  longitude:
+                                      _listAccidentData[index].xCoordinate,
+                                  child: Icon(
+                                    Icons.circle,
+                                    size: 12,
+                                    color: Colors.teal[300],
+                                  ),
                                 );
                               },
                               controller: _controller,
                               initialMarkersCount: 0,
-
                               zoomPanBehavior: _zoomPanBehavior,
                               color: Colors.transparent,
                               strokeColor: Theme.of(context).primaryColor,
                               strokeWidth: 0.5,
-                              source: _mapSource,
                               showDataLabels: false,
                               loadingBuilder: (BuildContext context) {
                                 return const SizedBox(
@@ -304,5 +320,11 @@ class _MyHomePageState extends State<MyHomePage> {
 
     return list;
   }
+}
 
+class Model {
+  Model(this.latitude, this.longitude);
+
+  final double latitude;
+  final double longitude;
 }
