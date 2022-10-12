@@ -97,7 +97,7 @@ class _AspectViewState extends State<AspectView> {
   }
 
   List<int> _getAspectTicks() {
-    return [10, 20, 30, 40, 50, 60, 70, 80, 90];
+    return [10, 20, 30, 40, 50, 60, 70, 81];
   }
 
   List<List<AccidentData>> _getAspectList(List<AccidentData> list) {

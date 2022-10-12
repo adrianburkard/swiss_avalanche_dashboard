@@ -7,7 +7,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:json_theme/json_theme.dart';
 import 'package:swiss_avalanche_dashboard/widgets/aspect_stat_widget.dart';
 import 'package:swiss_avalanche_dashboard/widgets/elevation_stat_widget.dart';
-import 'package:swiss_avalanche_dashboard/widgets/map_widget.dart';
+import 'package:swiss_avalanche_dashboard/widgets/map/map_widget.dart';
 import 'package:swiss_avalanche_dashboard/widgets/yearly_stat_widget.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 
@@ -72,28 +72,28 @@ class _MyHomePageState extends State<MyHomePage> {
           if (snapshot.data != null) {
             return SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(12.0),
+                padding: const EdgeInsets.all(8.0),
                 child: StaggeredGrid.count(
-                  crossAxisCount: 4,
-                  mainAxisSpacing: 6,
-                  crossAxisSpacing: 6,
+                  crossAxisCount: 8,
+                  mainAxisSpacing: 4,
+                  crossAxisSpacing: 4,
                   children: [
                     StaggeredGridTile.count(
-                      crossAxisCellCount: 2,
-                      mainAxisCellCount: 2,
+                      crossAxisCellCount: 4,
+                      mainAxisCellCount: 3,
                       child: MapView(
                         mapZoomPanBehavior: _mapZoomPanBehavior,
                         listAccidentData: snapshot.data!,
                       ),
                     ),
                     StaggeredGridTile.count(
-                      crossAxisCellCount: 1,
-                      mainAxisCellCount: 0.5,
+                      crossAxisCellCount: 2,
+                      mainAxisCellCount: 1,
                       child: YearlyStatView(accidentData: snapshot.data!),
                     ),
                     const StaggeredGridTile.count(
-                      crossAxisCellCount: 1,
-                      mainAxisCellCount: 1,
+                      crossAxisCellCount: 2,
+                      mainAxisCellCount: 2,
                       child: Card(
                         elevation: 20,
                         child: Padding(
@@ -103,9 +103,14 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                     StaggeredGridTile.count(
-                      crossAxisCellCount: 1,
-                      mainAxisCellCount: 1,
+                      crossAxisCellCount: 2,
+                      mainAxisCellCount: 2,
                       child: ElevationView(accidentData: snapshot.data!),
+                    ),
+                    StaggeredGridTile.count(
+                      crossAxisCellCount: 2,
+                      mainAxisCellCount: 2,
+                      child: AspectView(accidentData: snapshot.data!),
                     ),
                     StaggeredGridTile.count(
                       crossAxisCellCount: 1,

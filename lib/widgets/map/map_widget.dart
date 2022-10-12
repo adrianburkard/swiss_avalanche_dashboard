@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 
-import '../model/avalanche_accident_data.dart';
+import '../../model/avalanche_accident_data.dart';
+import 'map_pop_up.dart';
 
 class MapView extends StatefulWidget {
   final MapZoomPanBehavior mapZoomPanBehavior;
@@ -42,7 +43,17 @@ class _MapViewState extends State<MapView> {
                   ),
                 );
               },
-            )
+              tooltipSettings: const MapTooltipSettings(
+                  color: Color(0xff006876),
+                  strokeColor: Colors.white,
+                  strokeWidth: 1.5),
+              markerTooltipBuilder: (BuildContext context, int index) {
+                return MapPopUp(
+                  listAccidentData: widget.listAccidentData,
+                  index: index,
+                );
+              },
+            ),
           ],
         ),
       ),
