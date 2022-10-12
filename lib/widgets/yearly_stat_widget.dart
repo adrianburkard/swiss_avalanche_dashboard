@@ -56,7 +56,6 @@ class _YearlyStatViewState extends State<YearlyStatView> {
       DateTime year = DateTime(i);
       List<AccidentData> yearlyAccident =
           List.from(data.where((element) => element.date.year == year.year));
-      // _listYearlyDeaths.add(yearlyAccident);
       int num = 0;
       for (var element in yearlyAccident) {
         num += element.numberDead;
