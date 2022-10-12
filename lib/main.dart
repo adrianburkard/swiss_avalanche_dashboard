@@ -80,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: [
                     StaggeredGridTile.count(
                       crossAxisCellCount: 2,
-                      mainAxisCellCount: 2,
+                      mainAxisCellCount: 1.5,
                       child: MapView(
                         mapZoomPanBehavior: _mapZoomPanBehavior,
                         listAccidentData: snapshot.data!,
