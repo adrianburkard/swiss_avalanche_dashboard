@@ -10,6 +10,7 @@ import 'package:swiss_avalanche_dashboard/widgets/elevation_stat_widget.dart';
 import 'package:swiss_avalanche_dashboard/widgets/map/map_widget.dart';
 import 'package:swiss_avalanche_dashboard/widgets/number_stat_widget.dart';
 import 'package:swiss_avalanche_dashboard/widgets/yearly_stat_widget.dart';
+import 'package:swiss_avalanche_dashboard/scatter_chart.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 
 import 'doughnut_chart.dart';
@@ -87,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         elevation: 20,
                         child: Padding(
                           padding: EdgeInsets.all(8.0),
-                          child: DoughnutChart(),
+                          child: ScatterChart(),
                         ),
                       ),
                     ),
