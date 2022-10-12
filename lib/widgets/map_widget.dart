@@ -42,7 +42,71 @@ class _MapViewState extends State<MapView> {
                   ),
                 );
               },
-            )
+              tooltipSettings: const MapTooltipSettings(
+                  color: Colors.blue,
+                  strokeColor: Color.fromRGBO(252, 187, 15, 1),
+                  strokeWidth: 1.5),
+              markerTooltipBuilder: (BuildContext context, int index) {
+                return Container(
+                  width: 180,
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Stack(
+                        children: [
+                          Center(
+                            child: widget.listAccidentData[index].locationName
+                                    .isEmpty
+                                ? Text(
+                                    widget.listAccidentData[index].canton,
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: Theme.of(context)
+                                            .textTheme
+                                            .bodyText2!
+                                            .fontSize),
+                                  )
+                                : Text(
+                                    '${widget.listAccidentData[index].locationName} - ${widget.listAccidentData[index].canton}',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: Theme.of(context)
+                                            .textTheme
+                                            .bodyText2!
+                                            .fontSize),
+                                  ),
+                          ),
+                          const Icon(
+                            Icons.map,
+                            color: Colors.white,
+                            size: 16,
+                          ),
+                        ],
+                      ),
+                      const Divider(
+                        color: Colors.white,
+                        height: 10,
+                        thickness: 1.2,
+                      ),
+                      Column(
+                        children: [
+                          Text(
+                            'Todesopfer : ${widget.listAccidentData[index].numberDead}',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: Theme.of(context)
+                                    .textTheme
+                                    .bodyText2!
+                                    .fontSize),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
           ],
         ),
       ),
