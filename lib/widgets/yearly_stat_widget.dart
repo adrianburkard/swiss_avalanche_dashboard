@@ -17,6 +17,14 @@ class YearlyStatView extends StatefulWidget {
 }
 
 class _YearlyStatViewState extends State<YearlyStatView> {
+  late TooltipBehavior _tooltipBehavior;
+
+  @override
+  void initState() {
+    _tooltipBehavior = TooltipBehavior(enable: true);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -29,9 +37,28 @@ class _YearlyStatViewState extends State<YearlyStatView> {
               AsyncSnapshot<List<YearlyDeaths>> snapshot) {
             if (snapshot.data != null) {
               return SfCartesianChart(
+                tooltipBehavior: _tooltipBehavior,
+                primaryXAxis: NumericAxis(
+                  title: AxisTitle(
+                    text: 'Jahr',
+                  ),
+                ),
+                primaryYAxis: NumericAxis(
+                  title: AxisTitle(
+                    text: 'Anzahl Tote'
+                  )
+                ),
+                title: ChartTitle(text: 'Anzahl Tote von 1995 - 2021'),
+                palette: const <Color>[
+                  Colors.teal,
+                  Colors.orange,
+                  Colors.brown
+                ],
                 series: <ChartSeries>[
                   // Renders line chart
-                  LineSeries<YearlyDeaths, int>(
+                  SplineSeries<YearlyDeaths, int>(
+                    name: 'Anzahl Tote',
+                    enableTooltip: true,
                     dataSource: snapshot.data!,
                     xValueMapper: (YearlyDeaths data, _) => data.year,
                     yValueMapper: (YearlyDeaths data, _) => data.amountDeaths,

@@ -39,12 +39,12 @@ class _MapViewState extends State<MapView> {
                   child: const Icon(
                     Icons.location_pin,
                     size: 24,
-                    color: Colors.red,
+                    color: Colors.teal,
                   ),
                 );
               },
-              tooltipSettings: const MapTooltipSettings(
-                  color: Color(0xff006876),
+              tooltipSettings: MapTooltipSettings(
+                  color: Theme.of(context).primaryColor,
                   strokeColor: Colors.white,
                   strokeWidth: 1.5),
               markerTooltipBuilder: (BuildContext context, int index) {
