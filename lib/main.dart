@@ -7,7 +7,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:json_theme/json_theme.dart';
 import 'package:swiss_avalanche_dashboard/widgets/aspect_stat_widget.dart';
 import 'package:swiss_avalanche_dashboard/widgets/elevation_stat_widget.dart';
-import 'package:swiss_avalanche_dashboard/widgets/map_widget.dart';
+import 'package:swiss_avalanche_dashboard/widgets/map/map_widget.dart';
 import 'package:swiss_avalanche_dashboard/widgets/yearly_stat_widget.dart';
 import 'package:syncfusion_flutter_maps/maps.dart';
 
