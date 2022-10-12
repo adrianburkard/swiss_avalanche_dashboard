@@ -39,7 +39,7 @@ class _ElevationViewState extends State<ElevationView> {
             }
             return const Center(
               child: CircularProgressIndicator(
-                strokeWidth: 4,
+                strokeWidth: 5,
               ),
             );
           },

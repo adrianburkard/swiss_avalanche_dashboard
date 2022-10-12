@@ -41,7 +41,7 @@ class _YearlyStatViewState extends State<YearlyStatView> {
             }
             return const Center(
               child: CircularProgressIndicator(
-                strokeWidth: 4,
+                strokeWidth: 5,
               ),
             );
           },
