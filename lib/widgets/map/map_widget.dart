@@ -46,10 +46,23 @@ class _MapViewState extends State<MapView> {
                 return MapMarker(
                   latitude: widget.listAccidentData[index].yCoordinate,
                   longitude: widget.listAccidentData[index].xCoordinate,
-                  child: const Icon(
+                  child: Icon(
                     Icons.location_pin,
                     size: 24,
-                    color: Colors.teal,
+                    color: widget.listAccidentData[index].dangerLevel == null
+                        ? Colors.white
+                        : widget.listAccidentData[index].dangerLevel == 1
+                            ? Colors.green
+                            : widget.listAccidentData[index].dangerLevel == 2
+                                ? Colors.yellow[500]
+                                : widget.listAccidentData[index].dangerLevel ==
+                                        3
+                                    ? Colors.orange[700]
+                                    : widget.listAccidentData[index]
+                                                .dangerLevel ==
+                                            4
+                                        ? Colors.red[500]
+                                        : Colors.red[900],
                   ),
                 );
               },
