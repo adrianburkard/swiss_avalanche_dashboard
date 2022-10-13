@@ -52,7 +52,7 @@ class _YearlyStatViewState extends State<YearlyStatView> {
                 palette: const <Color>[
                   Colors.teal,
                   Colors.orange,
-                  Colors.brown
+                  Colors.brown,
                 ],
                 series: <ChartSeries>[
                   // Renders line chart

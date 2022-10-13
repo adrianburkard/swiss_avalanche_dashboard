@@ -5,12 +5,10 @@ import '../../model/avalanche_accident_data.dart';
 import 'map_pop_up.dart';
 
 class MapView extends StatefulWidget {
-  final MapZoomPanBehavior mapZoomPanBehavior;
   final List<AccidentData> listAccidentData;
 
   const MapView({
     Key? key,
-    required this.mapZoomPanBehavior,
     required this.listAccidentData,
   }) : super(key: key);
 
@@ -19,6 +17,18 @@ class MapView extends StatefulWidget {
 }
 
 class _MapViewState extends State<MapView> {
+  late MapZoomPanBehavior _mapZoomPanBehavior;
+
+  @override
+  void initState() {
+    _mapZoomPanBehavior = MapZoomPanBehavior(
+      zoomLevel: 8,
+      minZoomLevel: 8,
+    );
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -30,7 +40,7 @@ class _MapViewState extends State<MapView> {
             MapTileLayer(
               urlTemplate: 'https://tile.osm.ch/switzerland/{z}/{x}/{y}.png',
               initialFocalLatLng: const MapLatLng(46.800663464, 8.222665776),
-              zoomPanBehavior: widget.mapZoomPanBehavior,
+              zoomPanBehavior: _mapZoomPanBehavior,
               initialMarkersCount: widget.listAccidentData.length,
               markerBuilder: (BuildContext context, int index) {
                 return MapMarker(

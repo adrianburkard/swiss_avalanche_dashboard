@@ -43,8 +43,11 @@ class _ElevationViewState extends State<ElevationView> {
                     text: 'Anzahl Tote',
                   ),
                 ),
-                primaryXAxis:
-                    NumericAxis(title: AxisTitle(text: 'Höhe [m ü. M.]')),
+                primaryXAxis: NumericAxis(
+                  title: AxisTitle(
+                    text: 'Höhe [m ü. M.]',
+                  ),
+                ),
                 isTransposed: true,
                 tooltipBehavior: _tooltipBehavior,
                 series: <ChartSeries>[
