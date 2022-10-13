@@ -1,12 +1,12 @@
 class ElevationDeaths {
   int elevation;
-  int amountDeaths;
+  int numberLevel;
 
-  ElevationDeaths(this.elevation, this.amountDeaths);
+  ElevationDeaths(this.elevation, this.numberLevel);
 
   @override
   String toString() {
-    return 'ElevationDeaths{altitude: $elevation, amountDeaths: $amountDeaths}';
+    return 'ElevationDeaths{altitude: $elevation, numberLevel: $numberLevel}';
   }
 
 }
