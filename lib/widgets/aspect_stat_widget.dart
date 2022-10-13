@@ -17,23 +17,32 @@ class _AspectViewState extends State<AspectView> {
   Widget build(BuildContext context) {
     return Card(
       elevation: 20,
-      child: FutureBuilder<List<num>>(
+      child: FutureBuilder<List<List<num>>>(
         future: _getAspectData(widget.accidentData),
-        builder: (BuildContext context,
-            AsyncSnapshot<List<num>> snapshot) {
+        builder:
+            (BuildContext context, AsyncSnapshot<List<List<num>>> snapshot) {
           if (snapshot.data != null) {
             return Column(
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(top: 20.0),
-                  child: Text('Anzahl Tote nach Hanglage'),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20.0),
+                  child: Text(
+                    'Anzahl Tote nach Hanglage',
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
                 ),
                 Expanded(
                   child: RadarChart(
                     sides: 0,
-                    data: [snapshot.data!],
+                    data: snapshot.data!,
                     features: _getAspectValues(),
                     ticks: _getAspectTicks(),
+                    outlineColor: Colors.grey,
+                    graphColors: const <Color>[
+                      Colors.teal,
+                      Colors.orange,
+                      Colors.brown
+                    ],
                     // maxValue: 10,
                     // fillColor: Colors.blue,
                     // chartRadiusFactor: 0.85,
@@ -53,7 +62,7 @@ class _AspectViewState extends State<AspectView> {
     );
   }
 
-  Future<List<int>> _getAspectData(List<AccidentData> data) async {
+  Future<List<List<int>>> _getAspectData(List<AccidentData> data) async {
     List<List<AccidentData>> listSorted = _getAspectList(data);
 
     List<int> deathsSortedByAspect = [];
@@ -65,14 +74,12 @@ class _AspectViewState extends State<AspectView> {
       deathsSortedByAspect.add(numDead);
     }
 
-    /*
     List<int> numAccidentByAspect = [];
     for (var el in listSorted) {
       numAccidentByAspect.add(el.length);
     }
-    */
 
-    return deathsSortedByAspect;
+    return [deathsSortedByAspect];
   }
 
   List<String> _getAspectValues() {
@@ -120,5 +127,4 @@ class _AspectViewState extends State<AspectView> {
     tempList.add(List.from(list.where((element) => element.aspect == 'NNW')));
     return tempList;
   }
-
 }

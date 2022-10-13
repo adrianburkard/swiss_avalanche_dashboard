@@ -17,6 +17,14 @@ class ElevationView extends StatefulWidget {
 }
 
 class _ElevationViewState extends State<ElevationView> {
+  late TooltipBehavior _tooltipBehavior;
+
+  @override
+  void initState() {
+    _tooltipBehavior = TooltipBehavior(enable: true);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -28,14 +36,33 @@ class _ElevationViewState extends State<ElevationView> {
           builder: (BuildContext context,
               AsyncSnapshot<List<ElevationDeaths>> snapshot) {
             if (snapshot.data != null) {
-              return SfCartesianChart(isTransposed: true, series: <ChartSeries>[
-                HistogramSeries<ElevationDeaths, double>(
-                    dataSource: snapshot.data!,
-                    showNormalDistributionCurve: true,
-                    // curveColor: const Color.fromRGBO(192, 108, 132, 1),
-                    binInterval: 200,
-                    yValueMapper: (ElevationDeaths data, _) => data.elevation)
-              ]);
+              return SfCartesianChart(
+                title: ChartTitle(text: 'Anzahl Tote nach Höhenlage'),
+                primaryYAxis: NumericAxis(
+                  title: AxisTitle(
+                    text: 'Anzahl Tote',
+                  ),
+                ),
+                primaryXAxis: NumericAxis(
+                  title: AxisTitle(
+                    text: 'Höhe [m ü. M.]',
+                  ),
+                ),
+                isTransposed: true,
+                tooltipBehavior: _tooltipBehavior,
+                series: <ChartSeries>[
+                  HistogramSeries<ElevationDeaths, double>(
+                      name: 'Anzahl Tote',
+                      enableTooltip: true,
+                      dataSource: snapshot.data!,
+                      showNormalDistributionCurve: true,
+                      color: Colors.teal[300],
+                      curveColor: Colors.teal[900]!,
+                      binInterval: 200,
+                      yValueMapper: (ElevationDeaths data, _) =>
+                          data.elevation),
+                ],
+              );
             }
             return const Center(
               child: CircularProgressIndicator(
@@ -48,7 +75,8 @@ class _ElevationViewState extends State<ElevationView> {
     );
   }
 
-  Future<List<ElevationDeaths>> _getElevationDeaths(List<AccidentData> data) async {
+  Future<List<ElevationDeaths>> _getElevationDeaths(
+      List<AccidentData> data) async {
     List<ElevationDeaths> listElevationDeaths = [];
     for (var element in data) {
       for (int i = 0; i < element.numberDead; i++) {
@@ -58,5 +86,4 @@ class _ElevationViewState extends State<ElevationView> {
 
     return listElevationDeaths;
   }
-
 }
