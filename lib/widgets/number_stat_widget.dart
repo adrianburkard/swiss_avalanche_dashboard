@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../model/avalanche_accident_data.dart';
+import '../presentation/custom_icons.dart';
 
 class NumberView extends StatelessWidget {
   final List<AccidentData> accidentData;
@@ -31,12 +32,13 @@ class NumberView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.only(top: 32.0),
+                      padding: const EdgeInsets.only(top: 20),
                       child: Text(
                         '${snapshot.data}',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: Theme.of(context).textTheme.headline2?.fontSize,
+                          fontSize:
+                              Theme.of(context).textTheme.headline4?.fontSize,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -47,13 +49,22 @@ class NumberView extends StatelessWidget {
                           title,
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize:
-                                Theme.of(context).textTheme.titleMedium?.fontSize,
+                            fontSize: Theme.of(context)
+                                .textTheme
+                                .titleSmall
+                                ?.fontSize,
                           ),
                           textAlign: TextAlign.center,
                         ),
                       ),
                     ),
+                    const Padding(
+                      padding: EdgeInsets.only(bottom: 20),
+                      child: Icon(
+                        Custom.christian_cross,
+                        color: Colors.white,
+                      ),
+                    )
                   ],
                 ),
               );
