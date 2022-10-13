@@ -12,10 +12,18 @@ class DangerView extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<DangerView> createState() => DangerViewState();
+  State<DangerView> createState() => _DangerViewState();
 }
 
-class DangerViewState extends State<DangerView> {
+class _DangerViewState extends State<DangerView> {
+  late TooltipBehavior _tooltipBehavior;
+
+  @override
+  void initState() {
+    _tooltipBehavior = TooltipBehavior(enable: true);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -27,14 +35,31 @@ class DangerViewState extends State<DangerView> {
               builder: (BuildContext context,
                   AsyncSnapshot<List<DangerDeaths>> snapshot) {
                 if (snapshot.data != null) {
-                  return SfCircularChart(series: <CircularSeries>[
-                    // Renders scatter chart
-                    DoughnutSeries<DangerDeaths, int>(
-                      dataSource: snapshot.data!,
-                      xValueMapper: (DangerDeaths data, _) => data.amountDeaths,
-                      yValueMapper: (DangerDeaths data, _) => data.dangerLevel,
-                    )
-                  ]);
+                  return SfCircularChart(
+                      title: ChartTitle(text: 'Anzahl Tote nach Gefahrenstufe'),
+                      legend: Legend(
+                        isVisible: true,
+                        overflowMode: LegendItemOverflowMode.wrap,
+                      ),
+                      palette: <Color>[
+                        Colors.green,
+                        Color(0xFFFFEB3B),
+                        Color(0xFFF57C00),
+                        Color(0xFFF44336),
+                        Color(0xFFB71C1C),
+                      ],
+                      tooltipBehavior: _tooltipBehavior,
+                      series: <CircularSeries>[
+                        // Renders scatter chart
+                        DoughnutSeries<DangerDeaths, String>(
+                            dataSource: snapshot.data!,
+                            xValueMapper: (DangerDeaths data, _) =>
+                                data.dangerLevel.toString(),
+                            yValueMapper: (DangerDeaths data, _) =>
+                                data.amountDeaths,
+                            dataLabelSettings:
+                                DataLabelSettings(isVisible: true))
+                      ]);
                 }
                 return const Center(
                   child: CircularProgressIndicator(
@@ -53,7 +78,7 @@ class DangerViewState extends State<DangerView> {
       tempList
           .addAll(List.from(data.where((element) => element.dangerLevel == i)));
       int amount = 0;
-      for (var el in data) {
+      for (var el in tempList) {
         amount += el.numberDead;
       }
       listDangerDeaths.add(DangerDeaths(i, amount));
