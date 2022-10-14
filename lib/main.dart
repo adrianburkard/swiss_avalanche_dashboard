@@ -18,7 +18,7 @@ import 'model/avalanche_accident_data.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  final themeStr = await rootBundle.loadString('appainter_theme.json');
+  final themeStr = await rootBundle.loadString('assets/appainter_theme.json');
   final themeJson = jsonDecode(themeStr);
   final theme = ThemeDecoder.decodeThemeData(themeJson)!;
 
