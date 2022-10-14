@@ -12,9 +12,7 @@ import 'package:swiss_avalanche_dashboard/widgets/map/map_widget.dart';
 import 'package:swiss_avalanche_dashboard/widgets/number_stat_widget.dart';
 import 'package:swiss_avalanche_dashboard/widgets/yearly_stat_widget.dart';
 import 'package:swiss_avalanche_dashboard/widgets/danger_stat_widget.dart';
-import 'package:syncfusion_flutter_maps/maps.dart';
 
-import 'doughnut_chart.dart';
 import 'model/avalanche_accident_data.dart';
 
 void main() async {
