@@ -26,48 +26,63 @@ class _DangerViewState extends State<DangerView> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-        elevation: 20,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: FutureBuilder<List<DangerDeaths>>(
-              future: _getDangerDeaths(widget.accidentData),
-              builder: (BuildContext context,
-                  AsyncSnapshot<List<DangerDeaths>> snapshot) {
-                if (snapshot.data != null) {
-                  return SfCircularChart(
-                      title: ChartTitle(text: 'Anzahl Tote nach Gefahrenstufe'),
-                      legend: Legend(
-                        isVisible: true,
-                        overflowMode: LegendItemOverflowMode.wrap,
+    return Stack(
+      children: [
+        Card(
+            elevation: 20,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: FutureBuilder<List<DangerDeaths>>(
+                  future: _getDangerDeaths(widget.accidentData),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<List<DangerDeaths>> snapshot) {
+                    if (snapshot.data != null) {
+                      return SfCircularChart(
+                          title: ChartTitle(text: 'Anzahl Tote nach Gefahrenstufe'),
+                          legend: Legend(
+                            isVisible: true,
+                            overflowMode: LegendItemOverflowMode.wrap,
+                          ),
+                          palette: <Color>[
+                            Colors.green,
+                            Colors.yellow[500]!,
+                            Colors.orange[700]!,
+                            Colors.red[500]!,
+                            Colors.red[900]!,
+                          ],
+                          tooltipBehavior: _tooltipBehavior,
+                          series: <CircularSeries>[
+                            // Renders scatter chart
+                            DoughnutSeries<DangerDeaths, String>(
+                                dataSource: snapshot.data!,
+                                xValueMapper: (DangerDeaths data, _) =>
+                                    data.dangerLevel.toString(),
+                                yValueMapper: (DangerDeaths data, _) =>
+                                    data.amountDeaths,
+                                dataLabelSettings:
+                                    DataLabelSettings(isVisible: true))
+                          ]);
+                    }
+                    return const Center(
+                      child: CircularProgressIndicator(
+                        strokeWidth: 5,
                       ),
-                      palette: <Color>[
-                        Colors.green,
-                        Colors.yellow[500]!,
-                        Colors.orange[700]!,
-                        Colors.red[500]!,
-                        Colors.red[900]!,
-                      ],
-                      tooltipBehavior: _tooltipBehavior,
-                      series: <CircularSeries>[
-                        // Renders scatter chart
-                        DoughnutSeries<DangerDeaths, String>(
-                            dataSource: snapshot.data!,
-                            xValueMapper: (DangerDeaths data, _) =>
-                                data.dangerLevel.toString(),
-                            yValueMapper: (DangerDeaths data, _) =>
-                                data.amountDeaths,
-                            dataLabelSettings:
-                                DataLabelSettings(isVisible: true))
-                      ]);
-                }
-                return const Center(
-                  child: CircularProgressIndicator(
-                    strokeWidth: 5,
-                  ),
-                );
-              }),
-        ));
+                    );
+                  }),
+            )),
+        const Positioned( // will be positioned in the top right of the container
+          top: 10,
+          right: 10,
+          child: Tooltip(
+            message: 'Ramon du sauhund, lueg dech mol ah! so \ngseht mer eifach ned us.',
+            child: Icon(
+              Icons.help_outline,
+              color: Colors.teal,
+            ),
+          ),
+        ),
+      ],
+    );
   }
 
   Future<List<DangerDeaths>> _getDangerDeaths(List<AccidentData> data) async {

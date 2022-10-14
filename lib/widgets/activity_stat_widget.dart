@@ -23,44 +23,59 @@ class _ActivityViewState extends State<ActivityView> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 20,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: FutureBuilder<List<ActivityDeaths>>(
-            future: _getActivityDeaths(widget.accidentData),
-            builder: (BuildContext context,
-                AsyncSnapshot<List<ActivityDeaths>> snapshot) {
-              if (snapshot.data != null) {
-                return SfCartesianChart(
-                    title: ChartTitle(text: 'Anzahl Tote nach Aktivität'),
-                    palette: <Color>[
-                      Colors.teal[300]!,
-                      Colors.orange,
-                      Colors.brown
-                    ],
-                    primaryYAxis: NumericAxis(
-                        rangePadding: ChartRangePadding.normal
+    return Stack(
+      children: [
+        Card(
+          elevation: 20,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: FutureBuilder<List<ActivityDeaths>>(
+                future: _getActivityDeaths(widget.accidentData),
+                builder: (BuildContext context,
+                    AsyncSnapshot<List<ActivityDeaths>> snapshot) {
+                  if (snapshot.data != null) {
+                    return SfCartesianChart(
+                        title: ChartTitle(text: 'Anzahl Tote nach Aktivität'),
+                        palette: <Color>[
+                          Colors.teal[300]!,
+                          Colors.orange,
+                          Colors.brown
+                        ],
+                        primaryYAxis: NumericAxis(
+                            rangePadding: ChartRangePadding.normal
+                        ),
+                        tooltipBehavior: _tooltipBehavior,
+                        primaryXAxis: CategoryAxis(),
+                        series: <ChartSeries>[
+                          ColumnSeries<ActivityDeaths, String>(
+                            name: 'Anzahl Tote',
+                            dataSource: snapshot.data!,
+                            xValueMapper: (ActivityDeaths data, _) => data.activity,
+                            yValueMapper: (ActivityDeaths data, _) =>
+                                data.amountDeaths,
+                          )
+                        ]);
+                  }
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      strokeWidth: 5,
                     ),
-                    tooltipBehavior: _tooltipBehavior,
-                    primaryXAxis: CategoryAxis(),
-                    series: <ChartSeries>[
-                      ColumnSeries<ActivityDeaths, String>(
-                        name: 'Anzahl Tote',
-                        dataSource: snapshot.data!,
-                        xValueMapper: (ActivityDeaths data, _) => data.activity,
-                        yValueMapper: (ActivityDeaths data, _) =>
-                            data.amountDeaths,
-                      )
-                    ]);
-              }
-              return const Center(
-                child: CircularProgressIndicator(
-                  strokeWidth: 5,
-                ),
-              );
-            }),
-      ),
+                  );
+                }),
+          ),
+        ),
+        const Positioned( // will be positioned in the top right of the container
+          top: 10,
+          right: 10,
+          child: Tooltip(
+            message: 'Ramon du sauhund, lueg dech mol ah! so \ngseht mer eifach ned us.',
+            child: Icon(
+              Icons.help_outline,
+              color: Colors.teal,
+            ),
+          ),
+        ),
+      ],
     );
   }
 

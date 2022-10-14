@@ -18,69 +18,91 @@ class NumberView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 20,
-      color: Colors.teal[300],
-      child: Center(
-        child: FutureBuilder<int>(
-          future: _getDeathTotal(accidentData),
-          builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
-            if (snapshot.data != null) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(top: 20),
-                      child: Text(
-                        '${snapshot.data}',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize:
-                              Theme.of(context).textTheme.headline4?.fontSize,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: Center(
-                        child: Text(
-                          title,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: Theme.of(context)
-                                .textTheme
-                                .titleSmall
-                                ?.fontSize,
+    return Stack(
+      children: [
+        Card(
+          elevation: 20,
+          color: Colors.teal[300],
+          child: Center(
+            child: FutureBuilder<int>(
+              future: _getDeathTotal(accidentData),
+              builder: (BuildContext context, AsyncSnapshot<int> snapshot) {
+                if (snapshot.data != null) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20),
+                          child: Text(
+                            '${snapshot.data}',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: Theme.of(context)
+                                  .textTheme
+                                  .headline4
+                                  ?.fontSize,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                          textAlign: TextAlign.center,
                         ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 20),
-                      child: identifier == 0
-                          ? const Icon(Custom.christian_cross,
-                              color: Colors.white)
-                          : identifier == 1
-                              ? const FaIcon(FontAwesomeIcons.personFallingBurst,
+                        Expanded(
+                          child: Center(
+                            child: Text(
+                              title,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: Theme.of(context)
+                                    .textTheme
+                                    .titleSmall
+                                    ?.fontSize,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 20),
+                          child: identifier == 0
+                              ? const Icon(Custom.christian_cross,
                                   color: Colors.white)
-                              : const Icon(Icons.dangerous, color: Colors.white),
-                    )
-                  ],
-                ),
-              );
-            }
-            return const Center(
-              child: CircularProgressIndicator(
-                strokeWidth: 5,
-              ),
-            );
-          },
+                              : identifier == 1
+                                  ? const FaIcon(
+                                      FontAwesomeIcons.personFallingBurst,
+                                      color: Colors.white)
+                                  : const Icon(Icons.dangerous,
+                                      color: Colors.white),
+                        )
+                      ],
+                    ),
+                  );
+                }
+                return const Center(
+                  child: CircularProgressIndicator(
+                    strokeWidth: 5,
+                  ),
+                );
+              },
+            ),
+          ),
         ),
-      ),
+        Positioned(
+          // will be positioned in the top right of the container
+          top: 10,
+          right: 10,
+          child: Tooltip(
+            message: identifier == 0
+                ? 'Ramon du sauhund, lueg dech mol ah! so \ngseht mer eifach ned us.'
+                : 'Das ist für das zweite widget',
+            child: const Icon(
+              Icons.help_outline,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ],
     );
   }
 
