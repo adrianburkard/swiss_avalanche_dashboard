@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../model/avalanche_accident_data.dart';
 import '../presentation/custom_icons.dart';
@@ -58,12 +59,15 @@ class NumberView extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.only(bottom: 20),
-                      child: Icon(
-                        Custom.christian_cross,
-                        color: Colors.white,
-                      ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 20),
+                      child: identifier == 0
+                          ? const Icon(Custom.christian_cross,
+                              color: Colors.white)
+                          : identifier == 1
+                              ? const FaIcon(FontAwesomeIcons.personFallingBurst,
+                                  color: Colors.white)
+                              : const Icon(Icons.dangerous, color: Colors.white),
                     )
                   ],
                 ),

@@ -70,33 +70,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   crossAxisSpacing: 4,
                   children: [
                     StaggeredGridTile.count(
-                      crossAxisCellCount: 4,
-                      mainAxisCellCount: 3,
-                      child: MapView(
-                        listAccidentData: snapshot.data!,
-                      ),
-                    ),
-                    StaggeredGridTile.count(
-                      crossAxisCellCount: 2,
-                      mainAxisCellCount: 2,
-                      child: ActivityView(accidentData: snapshot.data!),
-                    ),
-                    StaggeredGridTile.count(
-                      crossAxisCellCount: 2,
-                      mainAxisCellCount: 2,
-                      child: DangerView(accidentData: snapshot.data!),
-                    ),
-                    StaggeredGridTile.count(
-                      crossAxisCellCount: 2,
-                      mainAxisCellCount: 2,
-                      child: ElevationView(accidentData: snapshot.data!),
-                    ),
-                    StaggeredGridTile.count(
-                      crossAxisCellCount: 2,
-                      mainAxisCellCount: 2,
-                      child: AspectView(accidentData: snapshot.data!),
-                    ),
-                    StaggeredGridTile.count(
                       crossAxisCellCount: 1,
                       mainAxisCellCount: 1,
                       child: NumberView(
@@ -111,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: NumberView(
                         accidentData: snapshot.data!,
                         title:
-                            'Personen von tödlichen Lawinen verschüttet seit 1995',
+                        'Personen von tödlichen Lawinen verschüttet seit 1995',
                         identifier: 1,
                       ),
                     ),
@@ -119,6 +92,33 @@ class _MyHomePageState extends State<MyHomePage> {
                       crossAxisCellCount: 2,
                       mainAxisCellCount: 1,
                       child: YearlyStatView(accidentData: snapshot.data!),
+                    ),
+                    StaggeredGridTile.count(
+                      crossAxisCellCount: 2,
+                      mainAxisCellCount: 2,
+                      child: ActivityView(accidentData: snapshot.data!),
+                    ),
+                    StaggeredGridTile.count(
+                      crossAxisCellCount: 2,
+                      mainAxisCellCount: 2,
+                      child: DangerView(accidentData: snapshot.data!),
+                    ),
+                    StaggeredGridTile.count(
+                      crossAxisCellCount: 4,
+                      mainAxisCellCount: 3,
+                      child: MapView(
+                        listAccidentData: snapshot.data!,
+                      ),
+                    ),
+                    StaggeredGridTile.count(
+                      crossAxisCellCount: 2,
+                      mainAxisCellCount: 2,
+                      child: ElevationView(accidentData: snapshot.data!),
+                    ),
+                    StaggeredGridTile.count(
+                      crossAxisCellCount: 2,
+                      mainAxisCellCount: 2,
+                      child: AspectView(accidentData: snapshot.data!),
                     ),
                   ],
                 ),
