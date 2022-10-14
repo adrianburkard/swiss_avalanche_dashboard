@@ -5,15 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:json_theme/json_theme.dart';
+import 'package:swiss_avalanche_dashboard/widgets/activity_stat_widget.dart';
 import 'package:swiss_avalanche_dashboard/widgets/aspect_stat_widget.dart';
 import 'package:swiss_avalanche_dashboard/widgets/elevation_stat_widget.dart';
 import 'package:swiss_avalanche_dashboard/widgets/map/map_widget.dart';
 import 'package:swiss_avalanche_dashboard/widgets/number_stat_widget.dart';
 import 'package:swiss_avalanche_dashboard/widgets/yearly_stat_widget.dart';
 import 'package:swiss_avalanche_dashboard/widgets/danger_stat_widget.dart';
-import 'package:syncfusion_flutter_maps/maps.dart';
 
-import 'doughnut_chart.dart';
 import 'model/avalanche_accident_data.dart';
 
 void main() async {
@@ -49,7 +48,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,33 +68,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   crossAxisSpacing: 4,
                   children: [
                     StaggeredGridTile.count(
-                      crossAxisCellCount: 4,
-                      mainAxisCellCount: 3,
-                      child: MapView(
-                        listAccidentData: snapshot.data!,
-                      ),
-                    ),
-                    StaggeredGridTile.count(
-                      crossAxisCellCount: 2,
-                      mainAxisCellCount: 1,
-                      child: YearlyStatView(accidentData: snapshot.data!),
-                    ),
-                    StaggeredGridTile.count(
-                      crossAxisCellCount: 2,
-                      mainAxisCellCount: 2,
-                      child: DangerView(accidentData: snapshot.data!),
-                    ),
-                    StaggeredGridTile.count(
-                      crossAxisCellCount: 2,
-                      mainAxisCellCount: 2,
-                      child: ElevationView(accidentData: snapshot.data!),
-                    ),
-                    StaggeredGridTile.count(
-                      crossAxisCellCount: 2,
-                      mainAxisCellCount: 2,
-                      child: AspectView(accidentData: snapshot.data!),
-                    ),
-                    StaggeredGridTile.count(
                       crossAxisCellCount: 1,
                       mainAxisCellCount: 1,
                       child: NumberView(
@@ -110,9 +81,42 @@ class _MyHomePageState extends State<MyHomePage> {
                       mainAxisCellCount: 1,
                       child: NumberView(
                         accidentData: snapshot.data!,
-                        title: 'Personen von tödlichen Lawinen verschüttet seit 1995',
+                        title:
+                        'Personen von tödlichen Lawinen verschüttet seit 1995',
                         identifier: 1,
                       ),
+                    ),
+                    StaggeredGridTile.count(
+                      crossAxisCellCount: 2,
+                      mainAxisCellCount: 1,
+                      child: YearlyStatView(accidentData: snapshot.data!),
+                    ),
+                    StaggeredGridTile.count(
+                      crossAxisCellCount: 2,
+                      mainAxisCellCount: 2,
+                      child: ActivityView(accidentData: snapshot.data!),
+                    ),
+                    StaggeredGridTile.count(
+                      crossAxisCellCount: 2,
+                      mainAxisCellCount: 2,
+                      child: DangerView(accidentData: snapshot.data!),
+                    ),
+                    StaggeredGridTile.count(
+                      crossAxisCellCount: 4,
+                      mainAxisCellCount: 3,
+                      child: MapView(
+                        listAccidentData: snapshot.data!,
+                      ),
+                    ),
+                    StaggeredGridTile.count(
+                      crossAxisCellCount: 2,
+                      mainAxisCellCount: 2,
+                      child: ElevationView(accidentData: snapshot.data!),
+                    ),
+                    StaggeredGridTile.count(
+                      crossAxisCellCount: 2,
+                      mainAxisCellCount: 2,
+                      child: AspectView(accidentData: snapshot.data!),
                     ),
                   ],
                 ),

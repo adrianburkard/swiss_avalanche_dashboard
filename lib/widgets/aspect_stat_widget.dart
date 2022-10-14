@@ -15,50 +15,65 @@ class AspectView extends StatefulWidget {
 class _AspectViewState extends State<AspectView> {
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 20,
-      child: FutureBuilder<List<List<num>>>(
-        future: _getAspectData(widget.accidentData),
-        builder:
-            (BuildContext context, AsyncSnapshot<List<List<num>>> snapshot) {
-          if (snapshot.data != null) {
-            return Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 20.0),
-                  child: Text(
-                    'Anzahl Tote nach Hanglage',
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
+    return Stack(
+      children: [
+        Card(
+          elevation: 20,
+          child: FutureBuilder<List<List<num>>>(
+            future: _getAspectData(widget.accidentData),
+            builder:
+                (BuildContext context, AsyncSnapshot<List<List<num>>> snapshot) {
+              if (snapshot.data != null) {
+                return Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0),
+                      child: Text(
+                        'Anzahl Tote nach Hanglage',
+                        style: Theme.of(context).textTheme.titleLarge,
+                      ),
+                    ),
+                    Expanded(
+                      child: RadarChart(
+                        sides: 0,
+                        data: snapshot.data!,
+                        features: _getAspectValues(),
+                        ticks: _getAspectTicks(),
+                        outlineColor: Colors.grey,
+                        graphColors: const <Color>[
+                          Colors.teal,
+                          Colors.orange,
+                          Colors.brown
+                        ],
+                        // maxValue: 10,
+                        // fillColor: Colors.blue,
+                        // chartRadiusFactor: 0.85,
+                        // textScaleFactor: 0.035,
+                      ),
+                    ),
+                  ],
+                );
+              }
+              return const Center(
+                child: CircularProgressIndicator(
+                  strokeWidth: 5,
                 ),
-                Expanded(
-                  child: RadarChart(
-                    sides: 0,
-                    data: snapshot.data!,
-                    features: _getAspectValues(),
-                    ticks: _getAspectTicks(),
-                    outlineColor: Colors.grey,
-                    graphColors: const <Color>[
-                      Colors.teal,
-                      Colors.orange,
-                      Colors.brown
-                    ],
-                    // maxValue: 10,
-                    // fillColor: Colors.blue,
-                    // chartRadiusFactor: 0.85,
-                    // textScaleFactor: 0.035,
-                  ),
-                ),
-              ],
-            );
-          }
-          return const Center(
-            child: CircularProgressIndicator(
-              strokeWidth: 5,
+              );
+            },
+          ),
+        ),
+        const Positioned( // will be positioned in the top right of the container
+          top: 10,
+          right: 10,
+          child: Tooltip(
+            message: 'Ramon du sauhund, lueg dech mol ah! so \ngseht mer eifach ned us.',
+            child: Icon(
+              Icons.help_outline,
+              color: Colors.teal,
             ),
-          );
-        },
-      ),
+          ),
+        ),
+      ],
     );
   }
 

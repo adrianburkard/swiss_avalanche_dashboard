@@ -27,51 +27,66 @@ class _ElevationViewState extends State<ElevationView> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 20,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: FutureBuilder<List<ElevationDeaths>>(
-          future: _getElevationDeaths(widget.accidentData),
-          builder: (BuildContext context,
-              AsyncSnapshot<List<ElevationDeaths>> snapshot) {
-            if (snapshot.data != null) {
-              return SfCartesianChart(
-                title: ChartTitle(text: 'Anzahl Tote nach Höhenlage'),
-                primaryYAxis: NumericAxis(
-                  title: AxisTitle(
-                    text: 'Anzahl Tote',
+    return Stack(
+      children: [
+        Card(
+          elevation: 20,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: FutureBuilder<List<ElevationDeaths>>(
+              future: _getElevationDeaths(widget.accidentData),
+              builder: (BuildContext context,
+                  AsyncSnapshot<List<ElevationDeaths>> snapshot) {
+                if (snapshot.data != null) {
+                  return SfCartesianChart(
+                    title: ChartTitle(text: 'Anzahl Tote nach Höhenlage'),
+                    primaryYAxis: NumericAxis(
+                      title: AxisTitle(
+                        text: 'Anzahl Tote',
+                      ),
+                    ),
+                    primaryXAxis: NumericAxis(
+                      title: AxisTitle(
+                        text: 'Höhe [m ü. M.]',
+                      ),
+                    ),
+                    isTransposed: true,
+                    tooltipBehavior: _tooltipBehavior,
+                    series: <ChartSeries>[
+                      HistogramSeries<ElevationDeaths, double>(
+                          name: 'Anzahl Tote',
+                          enableTooltip: true,
+                          dataSource: snapshot.data!,
+                          showNormalDistributionCurve: true,
+                          color: Colors.teal[300],
+                          curveColor: Colors.teal[900]!,
+                          binInterval: 200,
+                          yValueMapper: (ElevationDeaths data, _) =>
+                              data.elevation),
+                    ],
+                  );
+                }
+                return const Center(
+                  child: CircularProgressIndicator(
+                    strokeWidth: 5,
                   ),
-                ),
-                primaryXAxis: NumericAxis(
-                  title: AxisTitle(
-                    text: 'Höhe [m ü. M.]',
-                  ),
-                ),
-                isTransposed: true,
-                tooltipBehavior: _tooltipBehavior,
-                series: <ChartSeries>[
-                  HistogramSeries<ElevationDeaths, double>(
-                      name: 'Anzahl Tote',
-                      enableTooltip: true,
-                      dataSource: snapshot.data!,
-                      showNormalDistributionCurve: true,
-                      color: Colors.teal[300],
-                      curveColor: Colors.teal[900]!,
-                      binInterval: 200,
-                      yValueMapper: (ElevationDeaths data, _) =>
-                          data.elevation),
-                ],
-              );
-            }
-            return const Center(
-              child: CircularProgressIndicator(
-                strokeWidth: 5,
-              ),
-            );
-          },
+                );
+              },
+            ),
+          ),
         ),
-      ),
+        const Positioned( // will be positioned in the top right of the container
+          top: 10,
+          right: 10,
+          child: Tooltip(
+            message: 'Ramon du sauhund, lueg dech mol ah! so \ngseht mer eifach ned us.',
+            child: Icon(
+              Icons.help_outline,
+              color: Colors.teal,
+            ),
+          ),
+        ),
+      ],
     );
   }
 

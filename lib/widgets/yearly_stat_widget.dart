@@ -27,53 +27,68 @@ class _YearlyStatViewState extends State<YearlyStatView> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 20,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: FutureBuilder<List<YearlyDeaths>>(
-          future: _getYearlyStat(widget.accidentData),
-          builder: (BuildContext context,
-              AsyncSnapshot<List<YearlyDeaths>> snapshot) {
-            if (snapshot.data != null) {
-              return SfCartesianChart(
-                tooltipBehavior: _tooltipBehavior,
-                primaryXAxis: NumericAxis(
-                  title: AxisTitle(
-                    text: 'Jahr',
+    return Stack(
+      children: [
+        Card(
+          elevation: 20,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: FutureBuilder<List<YearlyDeaths>>(
+              future: _getYearlyStat(widget.accidentData),
+              builder: (BuildContext context,
+                  AsyncSnapshot<List<YearlyDeaths>> snapshot) {
+                if (snapshot.data != null) {
+                  return SfCartesianChart(
+                    tooltipBehavior: _tooltipBehavior,
+                    primaryXAxis: NumericAxis(
+                      title: AxisTitle(
+                        text: 'Jahr',
+                      ),
+                    ),
+                    primaryYAxis: NumericAxis(
+                      title: AxisTitle(
+                        text: 'Anzahl Tote'
+                      )
+                    ),
+                    title: ChartTitle(text: 'Anzahl Tote von 1995 - 2021'),
+                    palette: const <Color>[
+                      Colors.teal,
+                      Colors.orange,
+                      Colors.brown,
+                    ],
+                    series: <ChartSeries>[
+                      // Renders line chart
+                      SplineSeries<YearlyDeaths, int>(
+                        name: 'Anzahl Tote',
+                        enableTooltip: true,
+                        dataSource: snapshot.data!,
+                        xValueMapper: (YearlyDeaths data, _) => data.year,
+                        yValueMapper: (YearlyDeaths data, _) => data.amountDeaths,
+                      )
+                    ],
+                  );
+                }
+                return const Center(
+                  child: CircularProgressIndicator(
+                    strokeWidth: 5,
                   ),
-                ),
-                primaryYAxis: NumericAxis(
-                  title: AxisTitle(
-                    text: 'Anzahl Tote'
-                  )
-                ),
-                title: ChartTitle(text: 'Anzahl Tote von 1995 - 2021'),
-                palette: const <Color>[
-                  Colors.teal,
-                  Colors.orange,
-                  Colors.brown,
-                ],
-                series: <ChartSeries>[
-                  // Renders line chart
-                  SplineSeries<YearlyDeaths, int>(
-                    name: 'Anzahl Tote',
-                    enableTooltip: true,
-                    dataSource: snapshot.data!,
-                    xValueMapper: (YearlyDeaths data, _) => data.year,
-                    yValueMapper: (YearlyDeaths data, _) => data.amountDeaths,
-                  )
-                ],
-              );
-            }
-            return const Center(
-              child: CircularProgressIndicator(
-                strokeWidth: 5,
-              ),
-            );
-          },
+                );
+              },
+            ),
+          ),
         ),
-      ),
+        const Positioned( // will be positioned in the top right of the container
+          top: 10,
+          right: 10,
+          child: Tooltip(
+            message: 'Ramon du sauhund, lueg dech mol ah! so \ngseht mer eifach ned us.',
+            child: Icon(
+              Icons.help_outline,
+              color: Colors.teal,
+            ),
+          ),
+        ),
+      ],
     );
   }
 
