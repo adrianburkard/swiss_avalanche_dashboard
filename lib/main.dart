@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:json_theme/json_theme.dart';
+import 'package:swiss_avalanche_dashboard/widgets/activity_stat_widget.dart';
 import 'package:swiss_avalanche_dashboard/widgets/aspect_stat_widget.dart';
 import 'package:swiss_avalanche_dashboard/widgets/elevation_stat_widget.dart';
 import 'package:swiss_avalanche_dashboard/widgets/map/map_widget.dart';
@@ -49,7 +50,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,8 +78,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     StaggeredGridTile.count(
                       crossAxisCellCount: 2,
-                      mainAxisCellCount: 1,
-                      child: YearlyStatView(accidentData: snapshot.data!),
+                      mainAxisCellCount: 2,
+                      child: ActivityView(accidentData: snapshot.data!),
                     ),
                     StaggeredGridTile.count(
                       crossAxisCellCount: 2,
@@ -110,9 +110,15 @@ class _MyHomePageState extends State<MyHomePage> {
                       mainAxisCellCount: 1,
                       child: NumberView(
                         accidentData: snapshot.data!,
-                        title: 'Personen von tödlichen Lawinen verschüttet seit 1995',
+                        title:
+                            'Personen von tödlichen Lawinen verschüttet seit 1995',
                         identifier: 1,
                       ),
+                    ),
+                    StaggeredGridTile.count(
+                      crossAxisCellCount: 2,
+                      mainAxisCellCount: 1,
+                      child: YearlyStatView(accidentData: snapshot.data!),
                     ),
                   ],
                 ),

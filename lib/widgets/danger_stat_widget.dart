@@ -43,10 +43,10 @@ class _DangerViewState extends State<DangerView> {
                       ),
                       palette: <Color>[
                         Colors.green,
-                        Color(0xFFFFEB3B),
-                        Color(0xFFF57C00),
-                        Color(0xFFF44336),
-                        Color(0xFFB71C1C),
+                        Colors.yellow[500]!,
+                        Colors.orange[700]!,
+                        Colors.red[500]!,
+                        Colors.red[900]!,
                       ],
                       tooltipBehavior: _tooltipBehavior,
                       series: <CircularSeries>[
