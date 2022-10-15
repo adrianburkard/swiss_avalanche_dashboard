@@ -94,8 +94,9 @@ class NumberView extends StatelessWidget {
           right: 10,
           child: Tooltip(
             message: identifier == 0
-                ? 'Ramon du sauhund, lueg dech mol ah! so \ngseht mer eifach ned us.'
-                : 'Das ist für das zweite widget',
+                ? 'Die Box zeigt die Gesamtanzahl Lawinentoten.'
+                : 'Die Box zeigt die Anzahl Personen, welche von tödlichen \n'
+                'Lawinen mitgerissen wurden.',
             child: const Icon(
               Icons.help_outline,
               color: Colors.white,

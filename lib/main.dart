@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Lawinentote in der Schweiz'),
+        title: const Text('Lawinentote in der Schweiz (Winter 1995/1996 - Winter 2020/2021)'),
       ),
       body: FutureBuilder<List<AccidentData>>(
         future: _loadAsset(),
@@ -72,7 +72,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       mainAxisCellCount: 1,
                       child: NumberView(
                         accidentData: snapshot.data!,
-                        title: 'Tote insgesamt seit 1995',
+                        title: 'Tote insgesamt',
                         identifier: 0,
                       ),
                     ),
@@ -82,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       child: NumberView(
                         accidentData: snapshot.data!,
                         title:
-                        'Personen von tödlichen Lawinen verschüttet seit 1995',
+                        'Personen von tödlichen Lawinen verschüttet',
                         identifier: 1,
                       ),
                     ),

@@ -50,7 +50,7 @@ class _YearlyStatViewState extends State<YearlyStatView> {
                         text: 'Anzahl Tote'
                       )
                     ),
-                    title: ChartTitle(text: 'Anzahl Tote von 1995 - 2021'),
+                    title: ChartTitle(text: 'Anzahl Tote von 1996 - 2020'),
                     palette: const <Color>[
                       Colors.teal,
                       Colors.orange,
@@ -81,7 +81,9 @@ class _YearlyStatViewState extends State<YearlyStatView> {
           top: 10,
           right: 10,
           child: Tooltip(
-            message: 'Ramon du sauhund, lueg dech mol ah! so \ngseht mer eifach ned us.',
+            message: 'Das Liniendiagramm teilt die Lawinentoten nach \n'
+                'Verschüttungsjahr auf. Dabei werden die Jahre 1996 \n'
+                'bis 2020 betrachtet.',
             child: Icon(
               Icons.help_outline,
               color: Colors.teal,

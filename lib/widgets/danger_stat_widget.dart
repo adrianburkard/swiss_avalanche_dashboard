@@ -74,7 +74,13 @@ class _DangerViewState extends State<DangerView> {
           top: 10,
           right: 10,
           child: Tooltip(
-            message: 'Ramon du sauhund, lueg dech mol ah! so \ngseht mer eifach ned us.',
+            message: 'Das Kreisdiagramm teilt die Anzahl Lawinentoten nach \n'
+                'der am Ereignistag ausgegebenen Lawinengefahr ein. \n'
+                '1: gering \n'
+                '2: mässig \n'
+                '3: erheblich \n'
+                '4: gross \n'
+                '5: sehr gross',
             child: Icon(
               Icons.help_outline,
               color: Colors.teal,

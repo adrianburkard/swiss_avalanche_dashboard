@@ -68,7 +68,10 @@ class _ActivityViewState extends State<ActivityView> {
           top: 10,
           right: 10,
           child: Tooltip(
-            message: 'Ramon du sauhund, lueg dech mol ah! so \ngseht mer eifach ned us.',
+            message: 'Das Säulendiagramm teilt die Lawinentoten anhand der \n'
+                'Aktivitäten, bei denen sie gestorben sind, ein. Dabei \n'
+                'existieren die vier Kategorien "Tour", "Offpiste", \n'
+                '"Transportwege" und "Andere".',
             child: Icon(
               Icons.help_outline,
               color: Colors.teal,

@@ -93,7 +93,15 @@ class _MapViewState extends State<MapView> {
           top: 16,
           right: 16,
           child: Tooltip(
-            message: 'Ramon du sauhund, lueg dech mol ah! so \ngseht mer eifach ned us.',
+            message: 'Die Karte zeigt die genauen Standorte der Schadenslawinen. Die \n'
+                'Farben entsprechen den herausgegebene Gefahrenstufe an den \n'
+                'jeweiligen Ereignistagen. \n'
+                'weiss: keine Angabe \n'
+                'grün: gering (1) \n'
+                'gelb: mässig (2) \n'
+                'orange: erheblich (3) \n'
+                'hellrot: gross (4) \n'
+                'dunkelrot: sehr gross (5)',
             child: Icon(
               Icons.help_outline,
               color: Colors.teal,

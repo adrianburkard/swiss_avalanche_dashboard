@@ -79,7 +79,9 @@ class _ElevationViewState extends State<ElevationView> {
           top: 10,
           right: 10,
           child: Tooltip(
-            message: 'Ramon du sauhund, lueg dech mol ah! so \ngseht mer eifach ned us.',
+            message: 'Das Balkendiagramm zeigt in welcher Höhe die Lawinen \n'
+                'ausgelöst wurden die zu den Todesfällen führten. Die \n'
+                'schwarze Kurve zeigt die Normalverteilung der Daten.',
             child: Icon(
               Icons.help_outline,
               color: Colors.teal,
