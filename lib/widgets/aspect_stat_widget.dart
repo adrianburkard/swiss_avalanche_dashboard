@@ -128,13 +128,13 @@ class _AspectViewState extends State<AspectView> {
   List<List<AccidentData>> _getAspectList(List<AccidentData> list) {
     List<List<AccidentData>> tempList = [];
     tempList.add(List.from(list.where((element) => element.aspect == 'N')));
-    tempList.add(List.from(list.where((element) => element.aspect == 'NNO')));
-    tempList.add(List.from(list.where((element) => element.aspect == 'NO')));
-    tempList.add(List.from(list.where((element) => element.aspect == 'ONO')));
-    tempList.add(List.from(list.where((element) => element.aspect == 'O')));
-    tempList.add(List.from(list.where((element) => element.aspect == 'OSO')));
-    tempList.add(List.from(list.where((element) => element.aspect == 'SO')));
-    tempList.add(List.from(list.where((element) => element.aspect == 'SSO')));
+    tempList.add(List.from(list.where((element) => element.aspect == 'NNE')));
+    tempList.add(List.from(list.where((element) => element.aspect == 'NE')));
+    tempList.add(List.from(list.where((element) => element.aspect == 'ENE')));
+    tempList.add(List.from(list.where((element) => element.aspect == 'E')));
+    tempList.add(List.from(list.where((element) => element.aspect == 'ESE')));
+    tempList.add(List.from(list.where((element) => element.aspect == 'SE')));
+    tempList.add(List.from(list.where((element) => element.aspect == 'SSE')));
     tempList.add(List.from(list.where((element) => element.aspect == 'S')));
     tempList.add(List.from(list.where((element) => element.aspect == 'SSW')));
     tempList.add(List.from(list.where((element) => element.aspect == 'SW')));

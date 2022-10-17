@@ -86,7 +86,7 @@ class MapPopUp extends StatelessWidget {
               ),
               listAccidentData[index].aspect != null
                   ? Text(
-                      'Hangausrichtung: ${listAccidentData[index].aspect}',
+                      'Hangausrichtung: ${listAccidentData[index].aspect!.replaceAll('E', 'O')}',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize:
