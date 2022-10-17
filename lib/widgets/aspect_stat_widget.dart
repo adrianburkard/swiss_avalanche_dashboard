@@ -66,7 +66,10 @@ class _AspectViewState extends State<AspectView> {
           top: 10,
           right: 10,
           child: Tooltip(
-            message: 'Ramon du sauhund, lueg dech mol ah! so \ngseht mer eifach ned us.',
+            message: 'Das Diagramm teilt die Lawinentoten nach Exposition ein, \n'
+                'in der die Lawine ausgelöst wurde. Ein Ring im Diagramm \n'
+                'entspricht jeweils zehn Todesopfern. Die Expositionen sind, \n'
+                'equivalent zu einem Kompass, ganz aussen aufgetragen.',
             child: Icon(
               Icons.help_outline,
               color: Colors.teal,
