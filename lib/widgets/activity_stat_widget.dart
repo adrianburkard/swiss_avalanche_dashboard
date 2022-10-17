@@ -106,7 +106,7 @@ class _ActivityViewState extends State<ActivityView> {
               : elements.elementAt(0).activity == 'offpiste'
                   ? 'Offpiste'
                   : elements.elementAt(0).activity == 'transportation.corridor'
-                      ? 'Transportwege'
+                      ? 'Transport-\nwege'
                       : elements.elementAt(0).activity ==
                               'other, mixed or unknown'
                           ? 'Andere'

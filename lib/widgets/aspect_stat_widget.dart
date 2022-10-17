@@ -66,8 +66,8 @@ class _AspectViewState extends State<AspectView> {
           top: 10,
           right: 10,
           child: Tooltip(
-            message: 'Das Diagramm teilt die Lawinentoten nach Exposition, in \n'
-                ' der die Lawine ausgelöst wurde, ein. Ein Ring im Diagramm \n'
+            message: 'Das Diagramm teilt die Lawinentoten nach Exposition ein, \n'
+                'in der die Lawine ausgelöst wurde. Ein Ring im Diagramm \n'
                 'entspricht jeweils zehn Todesopfern. Die Expositionen sind, \n'
                 'equivalent zu einem Kompass, ganz aussen aufgetragen.',
             child: Icon(

@@ -22,12 +22,12 @@ class _MapViewState extends State<MapView> {
   @override
   void initState() {
     _mapZoomPanBehavior = MapZoomPanBehavior(
-      zoomLevel: 8,
-      minZoomLevel: 8,
-      toolbarSettings: const MapToolbarSettings(
+      zoomLevel: 7.5,
+      minZoomLevel: 7.5,
+      toolbarSettings: MapToolbarSettings(
         position: MapToolbarPosition.topLeft,
         iconColor: Colors.white,
-        itemBackgroundColor: Colors.teal,
+        itemBackgroundColor: Colors.teal[300],
         itemHoverColor: Colors.blue,
       ),
     );

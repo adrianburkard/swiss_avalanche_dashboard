@@ -35,45 +35,51 @@ class NumberView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Padding(
-                          padding: const EdgeInsets.only(top: 20),
+                          padding: const EdgeInsets.symmetric(vertical: 10),
                           child: Text(
                             '${snapshot.data}',
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: Theme.of(context)
                                   .textTheme
-                                  .headline4
+                                  .headline5
                                   ?.fontSize,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
-                        Expanded(
-                          child: Center(
-                            child: Text(
-                              title,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: Theme.of(context)
-                                    .textTheme
-                                    .titleSmall
-                                    ?.fontSize,
-                              ),
-                              textAlign: TextAlign.center,
+                        Center(
+                          child: Text(
+                            title,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall
+                                  ?.fontSize,
                             ),
+                            textAlign: TextAlign.center,
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 20),
+                          padding: const EdgeInsets.symmetric(vertical: 10),
                           child: identifier == 0
-                              ? const Icon(Custom.christian_cross,
-                                  color: Colors.white)
+                              ? const Icon(
+                                  Custom.christian_cross,
+                                  color: Colors.white,
+                                  size: 18,
+                                )
                               : identifier == 1
                                   ? const FaIcon(
                                       FontAwesomeIcons.personFallingBurst,
-                                      color: Colors.white)
-                                  : const Icon(Icons.dangerous,
-                                      color: Colors.white),
+                                      color: Colors.white,
+                                      size: 18,
+                                    )
+                                  : const Icon(
+                                      Icons.dangerous,
+                                      color: Colors.white,
+                                      size: 18,
+                                    ),
                         )
                       ],
                     ),
@@ -94,9 +100,9 @@ class NumberView extends StatelessWidget {
           right: 10,
           child: Tooltip(
             message: identifier == 0
-                ? 'Die Box zeigt die Gesamtanzahl Lawinentoten.'
+                ? 'Die Box zeigt die Gesamtanzahl Lawinentote seit 1995.'
                 : 'Die Box zeigt die Anzahl Personen, welche von tödlichen \n'
-                'Lawinen mitgerissen wurden.',
+                    'Lawinen mitgerissen wurden seit 1995.',
             child: const Icon(
               Icons.help_outline,
               color: Colors.white,

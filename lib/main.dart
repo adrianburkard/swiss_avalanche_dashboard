@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:csv/csv.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -12,6 +13,7 @@ import 'package:swiss_avalanche_dashboard/widgets/map/map_widget.dart';
 import 'package:swiss_avalanche_dashboard/widgets/number_stat_widget.dart';
 import 'package:swiss_avalanche_dashboard/widgets/yearly_stat_widget.dart';
 import 'package:swiss_avalanche_dashboard/widgets/danger_stat_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'model/avalanche_accident_data.dart';
 
@@ -52,7 +54,107 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Lawinentote in der Schweiz (Winter 1995/1996 - Winter 2020/2021)'),
+        title: const Text(
+            'Lawinentote in der Schweiz (Winter 1995/1996 - Winter 2020/2021)'),
+        actions: [
+          IconButton(
+            icon: const Icon(
+              Icons.info,
+              color: Colors.white,
+            ),
+            tooltip: 'Infos zu den Daten und dem Dashboard.',
+            onPressed: () => showDialog<String>(
+              context: context,
+              builder: (BuildContext context) => AlertDialog(
+                content: SizedBox(
+                  height: 300,
+                  width: 850,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Zielsetzung',
+                        style: TextStyle(
+                          fontSize:
+                              Theme.of(context).textTheme.titleLarge?.fontSize,
+                        ),
+                      ),
+                      Container(
+                        height: 16,
+                      ),
+                      Text(
+                        'Wie tödlich sind Lawinen in der Schweiz? Welche Hänge, Höhen und Gefahrenstufe sind hauptverantwortlich für die meisten Todesfälle? Nimmt die Anzahl Lawinentote zu oder ab?',
+                        style: TextStyle(
+                          fontSize:
+                              Theme.of(context).textTheme.titleMedium?.fontSize,
+                        ),
+                      ),
+                      Container(
+                        height: 10,
+                      ),
+                      Text(
+                        'Lawinen stellen eine grosse Gefahr für Bergsportler- und Bewohner dar. Sie gefährden sowohl Skitourengänger, Schneeschuhläufer und Freerider, wie auch Transportwege oder Gebäude. Um diese Gruppen schützen zu können, sollen vergangene Schadenslawinen analysiert werden. Dabei soll eruiert werden ob bei Schadenslawinen gewisse charakteristisch Merkmale, wie Exposition, Höhe oder Gefahrenstufe, beobachtet werden können. Zudem soll eruiert werden, wie sich die Anzahl Lawinentoten während den Beobachtungsjahren verändert hat. '
+                        '\nDas Dashboard soll bei zukünftigen Gefahrensituationen als Hilfe dazu gezogen werden können, um dadurch besonders gefährliche Hänge zu ermitteln. Dies kann sowohl eine Unterstützung bei der Tourenplanung, wie auch bei der Schliessung von Wegen und Strassen sein.',
+                        style: TextStyle(
+                          fontSize:
+                              Theme.of(context).textTheme.bodyMedium?.fontSize,
+                        ),
+                      ),
+                      Container(
+                        height: 16,
+                      ),
+                      Text(
+                        'Datengrundlage',
+                        style: TextStyle(
+                          fontSize:
+                              Theme.of(context).textTheme.titleLarge?.fontSize,
+                        ),
+                      ),
+                      Container(
+                        height: 10,
+                      ),
+                      RichText(
+                          text: TextSpan(children: [
+                        TextSpan(
+                          style: TextStyle(
+                            fontSize: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.fontSize,
+                          ),
+                          text:
+                              'Fatal avalanche accidents in Switzerland since 1995-1996. (12. Dezember 2021). Aufgerufen am 10. Oktober 2022 '
+                              'bei Envidat: ',
+                        ),
+                        TextSpan(
+                            style: TextStyle(
+                              fontSize: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.fontSize,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                            text:
+                                'https://www.envidat.ch/#/metadata/fatal-avalanche-accidents-switzerland-1995',
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                launchUrl(Uri.parse(
+                                    'https://www.envidat.ch/#/metadata/fatal-avalanche-accidents-switzerland-1995'));
+                              })
+                      ])),
+                    ],
+                  ),
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    onPressed: () => Navigator.pop(context, 'OK'),
+                    child: const Text('OK'),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
       body: FutureBuilder<List<AccidentData>>(
         future: _loadAsset(),
@@ -81,8 +183,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       mainAxisCellCount: 1,
                       child: NumberView(
                         accidentData: snapshot.data!,
-                        title:
-                        'Personen von tödlichen Lawinen verschüttet',
+                        title: 'Personen von tödlichen Lawinen verschüttet',
                         identifier: 1,
                       ),
                     ),
