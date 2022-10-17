@@ -67,10 +67,11 @@ class _MyHomePageState extends State<MyHomePage> {
               context: context,
               builder: (BuildContext context) => AlertDialog(
                 content: SizedBox(
-                  height: 300,
                   width: 850,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'Zielsetzung',
