@@ -114,19 +114,17 @@ class _MyHomePageState extends State<MyHomePage> {
                       Container(
                         height: 10,
                       ),
+                      Text(
+                        style: TextStyle(
+                          fontSize: Theme.of(context)
+                              .textTheme
+                              .bodyMedium
+                              ?.fontSize,
+                        ),
+                        'Fatal avalanche accidents in Switzerland since 1995-1996. (12. Dezember 2021). Aufgerufen am 10. Oktober 2022 bei Envidat: ',
+                      ),
                       RichText(
                           text: TextSpan(children: [
-                        TextSpan(
-                          style: TextStyle(
-                            fontSize: Theme.of(context)
-                                .textTheme
-                                .bodyMedium
-                                ?.fontSize,
-                          ),
-                          text:
-                              'Fatal avalanche accidents in Switzerland since 1995-1996. (12. Dezember 2021). Aufgerufen am 10. Oktober 2022 '
-                              'bei Envidat: ',
-                        ),
                         TextSpan(
                             style: TextStyle(
                               fontSize: Theme.of(context)
