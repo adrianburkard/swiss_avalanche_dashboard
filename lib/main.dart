@@ -52,6 +52,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    var screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -67,81 +68,92 @@ class _MyHomePageState extends State<MyHomePage> {
               context: context,
               builder: (BuildContext context) => AlertDialog(
                 content: SizedBox(
-                  width: 850,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Zielsetzung',
-                        style: TextStyle(
-                          fontSize:
-                              Theme.of(context).textTheme.titleLarge?.fontSize,
+                  width: screenWidth > 480 ? 850 : null,
+                  height: screenWidth < 480 ? 480 : null,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Zielsetzung',
+                          style: TextStyle(
+                            fontSize: Theme.of(context)
+                                .textTheme
+                                .titleLarge
+                                ?.fontSize,
+                          ),
                         ),
-                      ),
-                      Container(
-                        height: 16,
-                      ),
-                      Text(
-                        'Wie tödlich sind Lawinen in der Schweiz? Welche Hänge, Höhen und Gefahrenstufe sind hauptverantwortlich für die meisten Todesfälle? Nimmt die Anzahl Lawinentote zu oder ab?',
-                        style: TextStyle(
-                          fontSize:
-                              Theme.of(context).textTheme.titleMedium?.fontSize,
+                        Container(
+                          height: 16,
                         ),
-                      ),
-                      Container(
-                        height: 10,
-                      ),
-                      Text(
-                        'Lawinen stellen eine grosse Gefahr für Bergsportler- und Bewohner dar. Sie gefährden sowohl Skitourengänger, Schneeschuhläufer und Freerider, wie auch Transportwege oder Gebäude. Um diese Gruppen schützen zu können, sollen vergangene Schadenslawinen analysiert werden. Dabei soll eruiert werden ob bei Schadenslawinen gewisse charakteristisch Merkmale, wie Exposition, Höhe oder Gefahrenstufe, beobachtet werden können. Zudem soll eruiert werden, wie sich die Anzahl Lawinentoten während den Beobachtungsjahren verändert hat. '
-                        '\nDas Dashboard soll bei zukünftigen Gefahrensituationen als Hilfe dazu gezogen werden können, um dadurch besonders gefährliche Hänge zu ermitteln. Dies kann sowohl eine Unterstützung bei der Tourenplanung, wie auch bei der Schliessung von Wegen und Strassen sein.',
-                        style: TextStyle(
-                          fontSize:
-                              Theme.of(context).textTheme.bodyMedium?.fontSize,
+                        Text(
+                          'Wie tödlich sind Lawinen in der Schweiz? Welche Hänge, Höhen und Gefahrenstufe sind hauptverantwortlich für die meisten Todesfälle? Nimmt die Anzahl Lawinentote zu oder ab?',
+                          style: TextStyle(
+                            fontSize: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                ?.fontSize,
+                          ),
                         ),
-                      ),
-                      Container(
-                        height: 16,
-                      ),
-                      Text(
-                        'Datengrundlage',
-                        style: TextStyle(
-                          fontSize:
-                              Theme.of(context).textTheme.titleLarge?.fontSize,
+                        Container(
+                          height: 10,
                         ),
-                      ),
-                      Container(
-                        height: 10,
-                      ),
-                      Text(
-                        style: TextStyle(
-                          fontSize: Theme.of(context)
-                              .textTheme
-                              .bodyMedium
-                              ?.fontSize,
+                        Text(
+                          'Lawinen stellen eine grosse Gefahr für Bergsportler- und Bewohner dar. Sie gefährden sowohl Skitourengänger, Schneeschuhläufer und Freerider, wie auch Transportwege oder Gebäude. Um diese Gruppen schützen zu können, sollen vergangene Schadenslawinen analysiert werden. Dabei soll eruiert werden ob bei Schadenslawinen gewisse charakteristisch Merkmale, wie Exposition, Höhe oder Gefahrenstufe, beobachtet werden können. Zudem soll eruiert werden, wie sich die Anzahl Lawinentoten während den Beobachtungsjahren verändert hat. '
+                          '\nDas Dashboard soll bei zukünftigen Gefahrensituationen als Hilfe dazu gezogen werden können, um dadurch besonders gefährliche Hänge zu ermitteln. Dies kann sowohl eine Unterstützung bei der Tourenplanung, wie auch bei der Schliessung von Wegen und Strassen sein.',
+                          style: TextStyle(
+                            fontSize: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.fontSize,
+                          ),
                         ),
-                        'Fatal avalanche accidents in Switzerland since 1995-1996. (12. Dezember 2021). Aufgerufen am 10. Oktober 2022 bei Envidat: ',
-                      ),
-                      RichText(
-                          text: TextSpan(children: [
-                        TextSpan(
-                            style: TextStyle(
-                              fontSize: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium
-                                  ?.fontSize,
-                              color: Theme.of(context).primaryColor,
-                            ),
-                            text:
-                                'https://www.envidat.ch/#/metadata/fatal-avalanche-accidents-switzerland-1995',
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                launchUrl(Uri.parse(
-                                    'https://www.envidat.ch/#/metadata/fatal-avalanche-accidents-switzerland-1995'));
-                              })
-                      ])),
-                    ],
+                        Container(
+                          height: 16,
+                        ),
+                        Text(
+                          'Datengrundlage',
+                          style: TextStyle(
+                            fontSize: Theme.of(context)
+                                .textTheme
+                                .titleLarge
+                                ?.fontSize,
+                          ),
+                        ),
+                        Container(
+                          height: 10,
+                        ),
+                        Text(
+                          style: TextStyle(
+                            fontSize: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.fontSize,
+                          ),
+                          'Fatal avalanche accidents in Switzerland since 1995-1996. (12. Dezember 2021). Aufgerufen am 10. Oktober 2022 bei Envidat: ',
+                        ),
+                        RichText(
+                            text: TextSpan(children: [
+                          TextSpan(
+                              style: TextStyle(
+                                fontSize: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.fontSize,
+                                color: Theme.of(context).primaryColor,
+                              ),
+                              text:
+                                  'https://www.envidat.ch/#/metadata/fatal-avalanche-accidents-switzerland-1995',
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  launchUrl(Uri.parse(
+                                      'https://www.envidat.ch/#/metadata/fatal-avalanche-accidents-switzerland-1995'));
+                                })
+                        ])),
+                      ],
+                    ),
                   ),
                 ),
                 actions: <Widget>[
@@ -160,68 +172,135 @@ class _MyHomePageState extends State<MyHomePage> {
         builder:
             (BuildContext context, AsyncSnapshot<List<AccidentData>> snapshot) {
           if (snapshot.data != null) {
-            return SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: StaggeredGrid.count(
-                  crossAxisCount: 8,
-                  mainAxisSpacing: 4,
-                  crossAxisSpacing: 4,
-                  children: [
-                    StaggeredGridTile.count(
-                      crossAxisCellCount: 1,
-                      mainAxisCellCount: 1,
-                      child: NumberView(
-                        accidentData: snapshot.data!,
-                        title: 'Tote insgesamt',
-                        identifier: 0,
+            if (screenWidth < 450) {
+              return SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: StaggeredGrid.count(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 2,
+                    crossAxisSpacing: 4,
+                    children: [
+                      StaggeredGridTile.count(
+                        crossAxisCellCount: 1,
+                        mainAxisCellCount: 1,
+                        child: NumberView(
+                          accidentData: snapshot.data!,
+                          title: 'Tote insgesamt',
+                          identifier: 0,
+                        ),
                       ),
-                    ),
-                    StaggeredGridTile.count(
-                      crossAxisCellCount: 1,
-                      mainAxisCellCount: 1,
-                      child: NumberView(
-                        accidentData: snapshot.data!,
-                        title: 'Personen von tödlichen Lawinen verschüttet',
-                        identifier: 1,
+                      StaggeredGridTile.count(
+                        crossAxisCellCount: 1,
+                        mainAxisCellCount: 1,
+                        child: NumberView(
+                          accidentData: snapshot.data!,
+                          title: 'Personen von tödlichen Lawinen verschüttet',
+                          identifier: 1,
+                        ),
                       ),
-                    ),
-                    StaggeredGridTile.count(
-                      crossAxisCellCount: 2,
-                      mainAxisCellCount: 1,
-                      child: YearlyStatView(accidentData: snapshot.data!),
-                    ),
-                    StaggeredGridTile.count(
-                      crossAxisCellCount: 2,
-                      mainAxisCellCount: 2,
-                      child: ActivityView(accidentData: snapshot.data!),
-                    ),
-                    StaggeredGridTile.count(
-                      crossAxisCellCount: 2,
-                      mainAxisCellCount: 2,
-                      child: DangerView(accidentData: snapshot.data!),
-                    ),
-                    StaggeredGridTile.count(
-                      crossAxisCellCount: 4,
-                      mainAxisCellCount: 3,
-                      child: MapView(
-                        listAccidentData: snapshot.data!,
+                      StaggeredGridTile.count(
+                        crossAxisCellCount: 2,
+                        mainAxisCellCount: 2,
+                        child: YearlyStatView(accidentData: snapshot.data!),
                       ),
-                    ),
-                    StaggeredGridTile.count(
-                      crossAxisCellCount: 2,
-                      mainAxisCellCount: 2,
-                      child: ElevationView(accidentData: snapshot.data!),
-                    ),
-                    StaggeredGridTile.count(
-                      crossAxisCellCount: 2,
-                      mainAxisCellCount: 2,
-                      child: AspectView(accidentData: snapshot.data!),
-                    ),
-                  ],
+                      StaggeredGridTile.count(
+                        crossAxisCellCount: 2,
+                        mainAxisCellCount: 2,
+                        child: ActivityView(accidentData: snapshot.data!),
+                      ),
+                      StaggeredGridTile.count(
+                        crossAxisCellCount: 2,
+                        mainAxisCellCount: 2,
+                        child: DangerView(accidentData: snapshot.data!),
+                      ),
+                      screenWidth > 420 ? StaggeredGridTile.count(
+                        crossAxisCellCount: 2,
+                        mainAxisCellCount: 2,
+                        child: MapView(
+                          listAccidentData: snapshot.data!,
+                          screenWidth: screenWidth,
+                        ),
+                      ) : Container(),
+                      StaggeredGridTile.count(
+                        crossAxisCellCount: 2,
+                        mainAxisCellCount: 2,
+                        child: ElevationView(accidentData: snapshot.data!),
+                      ),
+                      StaggeredGridTile.count(
+                        crossAxisCellCount: 2,
+                        mainAxisCellCount: 2,
+                        child: AspectView(accidentData: snapshot.data!),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            );
+              );
+            } else {
+              return SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: StaggeredGrid.count(
+                    crossAxisCount: 8,
+                    mainAxisSpacing: 4,
+                    crossAxisSpacing: 4,
+                    children: [
+                      StaggeredGridTile.count(
+                        crossAxisCellCount: 1,
+                        mainAxisCellCount: 1,
+                        child: NumberView(
+                          accidentData: snapshot.data!,
+                          title: 'Tote insgesamt',
+                          identifier: 0,
+                        ),
+                      ),
+                      StaggeredGridTile.count(
+                        crossAxisCellCount: 1,
+                        mainAxisCellCount: 1,
+                        child: NumberView(
+                          accidentData: snapshot.data!,
+                          title: 'Personen von tödlichen Lawinen verschüttet',
+                          identifier: 1,
+                        ),
+                      ),
+                      StaggeredGridTile.count(
+                        crossAxisCellCount: 2,
+                        mainAxisCellCount: 1,
+                        child: YearlyStatView(accidentData: snapshot.data!),
+                      ),
+                      StaggeredGridTile.count(
+                        crossAxisCellCount: 2,
+                        mainAxisCellCount: 2,
+                        child: ActivityView(accidentData: snapshot.data!),
+                      ),
+                      StaggeredGridTile.count(
+                        crossAxisCellCount: 2,
+                        mainAxisCellCount: 2,
+                        child: DangerView(accidentData: snapshot.data!),
+                      ),
+                      StaggeredGridTile.count(
+                        crossAxisCellCount: 4,
+                        mainAxisCellCount: 3,
+                        child: MapView(
+                          listAccidentData: snapshot.data!,
+                          screenWidth: screenWidth,
+                        ),
+                      ),
+                      StaggeredGridTile.count(
+                        crossAxisCellCount: 2,
+                        mainAxisCellCount: 2,
+                        child: ElevationView(accidentData: snapshot.data!),
+                      ),
+                      StaggeredGridTile.count(
+                        crossAxisCellCount: 2,
+                        mainAxisCellCount: 2,
+                        child: AspectView(accidentData: snapshot.data!),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }
           }
           return const Center(
             child: CircularProgressIndicator(

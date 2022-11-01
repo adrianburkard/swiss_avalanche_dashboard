@@ -6,10 +6,12 @@ import 'map_pop_up.dart';
 
 class MapView extends StatefulWidget {
   final List<AccidentData> listAccidentData;
+  final double screenWidth;
 
   const MapView({
     Key? key,
     required this.listAccidentData,
+    required this.screenWidth,
   }) : super(key: key);
 
   @override
@@ -22,8 +24,8 @@ class _MapViewState extends State<MapView> {
   @override
   void initState() {
     _mapZoomPanBehavior = MapZoomPanBehavior(
-      zoomLevel: 7.5,
-      minZoomLevel: 7.5,
+      zoomLevel:  widget.screenWidth > 480 ? 7.5 : 6.5,
+      minZoomLevel: widget.screenWidth > 480 ? 7.5 : 6.5,
       toolbarSettings: MapToolbarSettings(
         position: MapToolbarPosition.topLeft,
         iconColor: Colors.white,
